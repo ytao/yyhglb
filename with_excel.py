@@ -6,7 +6,8 @@ import pdb
 class project_data():
     def __init__(self):
         '''初始化'''
-        self.filename='一元化管理表.xlsx'
+        self.filename='//10.35.5.9/维修日报/三焊装/三焊装.一元化管理表.xlsx'
+        # self.filename='一元化管理表.xlsx'
         if os.path.isfile(self.filename)==False:
             self.init_success=False
         if os.path.isfile(self.filename+'.lock')==True:

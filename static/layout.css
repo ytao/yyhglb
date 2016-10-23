@@ -2,11 +2,11 @@
 {
 	color:white;
 	text-align:center; 
-	/* background-color: #007fff; */
 	/* height:100px; */
 	/* line-height:100px; */
-	background-color: #336633;
-	/* background-color: #003366; */
+	/* background-color: #004ead; */
+	/* background-color: #336633; */
+	background-color: #003366;
 }
 #footer {
 	text-align:center;
@@ -27,7 +27,8 @@
 	float:left;
 	width:10%
 	height:200px;
-	background:lightblue;
+	/* background-color:lightblue; */
+	border-width:0px;
 }
 #right_div {
 	float:left;
@@ -40,5 +41,31 @@
 }
 body
 {
-	background-color:grey;
+	background-color:darkgrey;
+	/* background-color:#EBEBEB; */
+}
+
+/* .layout{ */
+/* 	margin:auto; */
+/* 	/1* padding:9px; *1/ */
+/* } */
+
+#submitBtn
+{
+	float:right;
+	font-size:large;
+	color:#004ead;
+}
+
+
+.easyui-combobox
+{
+	width:150px;
+}
+
+/* .layout-panel-south */
+#region-south
+{
+	background-color:#003366;
+	color:white;
 }

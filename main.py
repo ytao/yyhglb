@@ -20,7 +20,7 @@ def getAllRecords():
     the_captions=[]
     the_datas=[]
     the_captions,the_datas=new_record.getRecords()
-    return render_template('getAllRecords.html',the_captions=the_captions,the_datas=the_datas)
+    return render_template('getAllRecords.html',the_captions=the_captions,the_datas=the_datas,file_name=new_record.filename,succeed="0")
 
 @app.route('/setDataTableLanguage')
 def setDataTableLanguage():
@@ -30,7 +30,16 @@ def setDataTableLanguage():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # new_record=we.project_data()
+    # return render_template('index.html',file_name=new_record.filename)
+
+    l=[]
+    new_record=we.project_data()
+    # new_record.readRecords(l)
+    the_captions=[]
+    the_datas=[]
+    the_captions,the_datas=new_record.getRecords()
+    return render_template('getAllRecords.html',the_captions=the_captions,the_datas=the_datas,file_name=new_record.filename,succeed="0")
 
 @app.route('/writeRecord',methods=['GET','POST'])
 def writeRecord():
@@ -89,7 +98,13 @@ def writeRecord():
         # 写入数据
         new_record.writePeopleStatus(dic_persons,editRow)
         new_record.testWrite2(c.dic_error_information,c.dic_date,editRow)
-        return render_template('success.html')
+        # return render_template('success.html')
+        # new_record.readRecords(l)
+        the_captions=[]
+        the_datas=[]
+        the_captions,the_datas=new_record.getRecords()
+        return render_template('getAllRecords.html',the_captions=the_captions,the_datas=the_datas,file_name=new_record.filename,succeed="1")
+        # return render_template('success.html')
 
 
 @app.route('/getOneRecord')
@@ -108,7 +123,7 @@ def getOneRecord():
     myconf=new_record.readDataList()
     list_persons=new_record.getPeopleList()
     dic_persons=new_record.getPeopleStatus(r)
-    return render_template('getOneRecord.html',dic_value=mydata,editRow=r,dataList=myconf,dic_persons=dic_persons,list_persons=list_persons)
+    return render_template('getOneRecord.html',dic_value=mydata,editRow=r,dataList=myconf,dic_persons=dic_persons,list_persons=list_persons,file_name=new_record.filename)
 
 # 程序启动
 if __name__ == '__main__':

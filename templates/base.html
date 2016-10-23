@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn">
 	<head>
 		<meta charset="utf-8">
@@ -11,30 +11,36 @@
 		<!-- easyui -->
 		<link rel="stylesheet" href="static/jquery/jquery-easyui-1.4.5/themes/icon.css">
 		<link rel="stylesheet" href="static/jquery/jquery-easyui-1.4.5/themes/color.css">
-		<link rel="stylesheet" href="static/jquery/jquery-easyui-1.4.5/themes/yt/easyui.css">
+		<link rel="stylesheet" href="static/jquery/jquery-easyui-1.4.5/themes/metro-blue/easyui.css">
 		<script src="static/jquery/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
 
 		<title>《故障处理一元化表格》远程输入界面</title>
 	</head>
 	<body>
-		<div class="easyui-layout" style="width:100%;height:700px;" >
-			<div region="north" id="page-header" style="height:100px;font-height:100px">
-				<H1 style="font-family:SimHei;font-size:36px">《故障处理一元化表格》远程输入界面</H1>
-				{% block title %}
-				{% endblock %}
-			</div>
-			<div region="west" title="导航栏" style="width:10%">
-				<ul>
-					<li><a href="/getAllRecords">查看所有记录</a></li>
-					<li><a href="/getOneRecord" >新增记录</a></li>
-				</ul>
-			</div>
-			<div region="center" title="操作区 " style="width:90%">
-				<!-- <div data-options="region:'west',split:true" id="right-div"> -->
-					{% block right %}
+		<div class="easyui-layout" style="width:90%;height:700px;margin:auto;" >
+			<!-- <div class="easyui-layout" style="width:90%;height:700px;padding:20px;margin:auto;" > -->
+				<div region="north" id="page-header" style="height:100px;font-height:100px">
+					<H1 style="font-family:SimHei;font-size:36px">《故障处理一元化表格》远程输入界面</H1>
+					{% block title %}
 					{% endblock %}
 				</div>
-				<div region="south" style="text-align:center">
+				<!-- <div region="west" style="width:15%"> -->
+				<div region="west" title="导航栏" style="width:15%;">
+					<ul>
+						<li><a href="/getAllRecords">查看所有记录</a></li>
+						<li><a href="/getOneRecord" >新增记录</a></li>
+					</ul>
+				</div>
+				<!-- <div region="center" style="width:85%"> -->
+				<div region="center" title="操作区 " style="width:85%">
+					<div class="easyui-panel" style="padding:5px">
+					{% block right %}
+					{% endblock %}
+					</div>
+				</div>
+				<div id="region-south" region="south" style="text-align:center;height:50px;">
+					excel文件地址：{{file_name}}
+					</br>
 					by yt @2016
 				</div>
 			</div>
