@@ -1,0 +1,44 @@
+#header,#page-header
+{
+	color:white;
+	text-align:center; 
+	/* background-color: #007fff; */
+	/* height:100px; */
+	/* line-height:100px; */
+	background-color: #336633;
+	/* background-color: #003366; */
+}
+#footer {
+	text-align:center;
+	position:absolute;
+	bottom:10px;
+	border-top:1px black solid;
+	/* color:transparent; */
+	opacity:0.1;
+	/* margin-left:auto; */
+	/* margin-right:auto; */
+}
+#footer:hover
+{
+	color:black;
+	opacity:1;
+}
+#left_div {
+	float:left;
+	width:10%
+	height:200px;
+	background:lightblue;
+}
+#right_div {
+	float:left;
+	width:90%
+}
+
+#left_div:hover
+{
+	opacity:1;
+}
+body
+{
+	background-color:grey;
+}

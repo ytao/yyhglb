@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% block title %}
+{% endblock %}
+{% block right %}
+<form action="writeRecord" method="POST" name="input">
+	<!-- 故障发生时间 -->
+	<!-- <div id="accordion"> -->
+		<div class="easyui-accordion">
+			<!-- <H3>1. 故障现象</H3> -->
+			<div title="1. 故障现象">
+				<fieldset>
+					<legend><b>故障及停止时间</b></legend>
+					<table>
+						<tr>
+							<td>
+								故障发生日期：
+								<!-- <input class="easyui-datebox" type="text" name="error_date" id="error_date"> -->
+								<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" name="error_date" id="error_date"></input>
+								<!-- <input type="text" class="datepicker" name="error_date" id="error_date" maxlength="8" size="8"> -->
+
+							</td>
+							<td>
+								故障发生时间：
+								<select class="easyui-combobox" id="error_hour" name="error_hour">
+									{%for i in range(0,24)%}
+									<option value="{{i}}">{{i}}</option>
+									{% endfor %}
+								</select>
+								时
+								<select class="easyui-combobox" id="error_minute" name="error_minute">
+									{%for i in range(0,60)%}
+									<option value="{{i}}">{{i}}</option>
+									{% endfor %}
+									<select>
+										分
+									</td>
+								</tr>
+								<tr>
+									<td>
+										生产线停止时间：
+										<input class="easyui-textbox" type="TEXT" id="product_line_stop_time" name="product_line_stop_time" maxlength="4" size="4">分钟
+									</td>
+									<td>
+										设备停止时间：
+										<input class="easyui-textbox" type="TEXT" name="equipment_stop_time" id="equipment_stop_time" maxlength="4" size="4">分钟
+									</td>
+									<td>
+										修理时间：
+										<input class="easyui-textbox" type="TEXT" name="maintain_time" id="maintain_time" maxlength="4" size="4">分钟
+									</td>
+								</tr>
+							</table>
+						</fieldset>
+						<fieldset>
+							<legend><b>故障部位</b></legend>
+							<table>
+								<tr>
+									<td>
+										生产线：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="product_line" name="product_line">
+											{% for item in dataList['product_line'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["product_line"]}}">{{dic_value["product_line"]}}</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										设备名称：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="equipment_name" name="equipment_name">
+											{% for item in dataList['equipment_name'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["equipment_name"]}}">{{dic_value["equipment_name"]}}</option>
+										</select>
+									</td>
+									<td>
+										故障部位：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="error_position" name="error_position">
+											{% for item in dataList['error_position'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_position"]}}">{{dic_value["error_position"]}}</option>
+										</select>
+									</td>
+									<td>
+										故障部品：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="error_component" name="error_component">
+											{% for item in dataList['error_component'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_component"]}}">{{dic_value["error_component"]}}</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										故障现象：
+									</td>
+									<td>
+										<!-- <textarea id="error_appearance_bak" name="error_appearance" cols="30" rows="3"></textarea> -->
+										<select class="easyui-combobox" id="error_appearance" name="error_appearance">
+											{% for item in dataList['error_appearance'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_appearance"]}}">{{dic_value["error_appearance"]}}</option>
+										</select>
+									</td>
+									<tr>
+									</tr>
+								</tr>
+							</table>
+						</fieldset>
+
+					</div>
+
+					<div title="2. 故障原因">
+						<fieldset>
+							<legend><b>故障分类</b></legend>
+							<table>
+								<tr>
+									<td>
+										新发再发 区分：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="error_type1" name="error_type1">
+											{% for item in dataList['error_type1'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_type1"]}}">{{dic_value["error_type1"]}}</option>
+										</select>
+									</td>
+									<td>
+										机械电气 区分：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="error_type2" name="error_type2">
+											{% for item in dataList['error_type2'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_type2"]}}">{{dic_value["error_type2"]}}</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										生产影响：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="affect" name="affect">
+											{% for item in dataList['affect'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["affect"]}}">{{dic_value["affect"]}}</option>
+										</select>
+									</td>
+									<td>
+										责任区分：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="duty" name="duty">
+											{% for item in dataList['duty'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["duty"]}}">{{dic_value["duty"]}}</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+
+						</fieldset>
+						<fieldset>
+							<legend><b>原因分析</b></legend>
+							<table>
+								<tr>
+									<td>
+										劣化现象：
+									</td>
+									<td>
+										<select class="easyui-combobox" id="deterioration_appearance" name="deterioration_appearance">
+											{% for item in dataList['deterioration_appearance'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["deterioration_appearance"]}}">{{dic_value["deterioration_appearance"]}}</option>
+										</select>
+									</td>
+									<tr>
+									</tr>
+									<td>
+										故障原因：
+									</td>
+									<td>
+										<!-- <textarea id="error_reason" name="error_reason" cols="30" rows="3"></textarea> -->
+										<select class="easyui-combobox" id="error_reason" name="error_reason">
+											{% for item in dataList['error_reason'] %}
+											<option value="{{item}}">{{item}}</option>
+											{% endfor %}
+											<option value="{{dic_value["error_reason"]}}">{{dic_value["error_reason"]}}</option>
+										</select>
+									</td>
+								</tr>
+							</tr>
+							<td>
+								设备管理要因：
+							</td>
+							<td>
+								<select class="easyui-combobox" id="main_factor" name="main_factor">
+									{% for item in dataList['main_factor'] %}
+									<option value="{{item}}">{{item}}</option>
+									{% endfor %}
+									<option value="{{dic_value["main_factor"]}}">{{dic_value["main_factor"]}}</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</div>
+			<div title="3. 故障对策">
+				<fieldset>
+					<legend><b>对策执行</b></legend>
+					<fieldset>
+						<legend>参与保全人员:</legend>
+						{% for item in list_persons %}
+						<label ><input  type="checkbox" name="{{item}}" id="{{item}}" value="1"  
+							{% if dic_persons[item]=="1" %}
+							checked
+							{% endif %}
+							/>{{item}}</label>
+						{% endfor %}
+					</fieldset>
+					<table>
+						<!-- <tr> -->
+							<!-- <td> -->
+								<!-- 	工数： -->
+								<!-- 	<input type="TEXT" id="maintain_duration" name="maintain_duration"> -->
+								<!-- </td> -->
+							<!-- </tr> -->
+						<tr>
+							<td>
+								保全区分：
+								<select class="easyui-combobox" id="maintain_type" name="maintain_type">
+									{% for item in dataList['maintain_type'] %}
+									<option value="{{item}}">{{item}}</option>
+									{% endfor %}
+									<option value="{{dic_value["maintain_type"]}}">{{dic_value["maintain_type"]}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								对策实施：
+								<!-- <textarea id="plan" name="plan" cols="40" rows="3"></textarea> -->
+								<select class="easyui-combobox" id="plan" name="plan">
+									{% for item in dataList['plan'] %}
+									<option value="{{item}}">{{item}}</option>
+									{% endfor %}
+									<option value="{{dic_value["plan"]}}">{{dic_value["plan"]}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								备注：
+								<textarea class="easyui-textbox" data-options="multiline:true" style="width:300px;height:100px" id="note" name="note" ></textarea>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+
+				<fieldset>
+					<legend><b>对策执行与确认</b></legend>
+					<tr>
+						<td>
+							计划完成时间：
+							<!-- <input type="TEXT" class="datepicker" name="propose_date" id="propose_date"> -->
+							<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" name="propose_date" id="propose_date"></input>
+						</td>
+						<td>
+							实际完成时间：
+							<!-- <input type="TEXT" class="datepicker" name="actual_date" id="actual_date"> -->
+							<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" name="actual_date" id="actual_date"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							对策确认:
+							<select class="easyui-combobox" id="confirm_man" name="confirm_man">
+								{% for item in dataList['confirm_man'] %}
+								<option value="{{item}}">{{item}}</option>
+								{% endfor %}
+								<option value="{{dic_value["confirm_man"]}}">{{dic_value["confirm_man"]}}</option>
+							</select>
+						</td>
+					</tr>
+				</fieldset>
+			</div>
+		</div>
+		<br />
+		<input class="easyui-linkbutton" type="submit" value="提交" style="float:right">
+		<input type="text" name="editRow" id="thisRow" style="display:none">
+		<!-- </div> -->
+	<!-- </div> -->
+<!-- </div> -->
+				</form>
+				<script>
+					<!-- 实现数据载入功能 -->
+					$("#error_date").val("{{dic_value["error_year"]}}-{{dic_value["error_month"]}}-{{dic_value["error_day"]}}")
+					$("#propose_date").val("{{dic_value["propose_year"]}}-{{dic_value["propose_month"]}}-{{dic_value["propose_day"]}}")
+					$("#actual_date").val("{{dic_value["actual_year"]}}-{{dic_value["actual_month"]}}-{{dic_value["actual_day"]}}")
+					$("#thisRow").val({{editRow}})
+				</script>
+
+				<!-- 新增的easyui日期格式 -->
+				<script type="text/javascript">
+					function myformatter(date){
+						var y = date.getFullYear();
+						var m = date.getMonth()+1;
+						var d = date.getDate();
+						return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+					}
+function myparser(s){
+	if (!s) return new Date();
+	var ss = (s.split('-'));
+	var y = parseInt(ss[0],10);
+	var m = parseInt(ss[1],10);
+	var d = parseInt(ss[2],10);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(y,m-1,d);
+	} else {
+		return new Date();
+	}
+}
+{%for x in dic_value %}
+$("#{{x}}").val("{{dic_value[x]}}")
+{% endfor %}
+				</script>
+				{% endblock %}

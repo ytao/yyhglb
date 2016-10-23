@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+{% endblock %}
+{% block right %}
+<!-- <H3> 数据列表： </H3> -->
+<!-- <hr /> -->
+<!-- <table class="easyui-datagrid" style="font-size:small" width="100%" class="display cell-border compact hover order-column "> -->
+<table id="grid_id" style="font-size:small" width="100%" class="display cell-border compact hover order-column ">
+	<thead>
+		<tr>
+			{% for i in the_captions %}
+			<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for a in the_datas %}
+		<tr>
+			{% for i in a %}
+			<td>{{i}}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="div_hidden" style="display:none">
+	<form action="getOneRecord" method="GET">
+		<input type="TEXT" id="edtRow"  name="editRow">
+		<input id="btn_sumbit_row" type="submit" value="Submit" >
+	</form>
+</div>
+<div id="dlg" title="打开此行进行编辑吗?" style="display:none">
+	打开此行进行详细编辑吗？
+</div>
+<script>
+	$("#accordion").accordion()
+	$("#grid_id").DataTable({
+		"aLengthMenu":[[5, 25, -1], [5, 25, "所有"]],
+		<!-- "sScrollY": "300px", -->
+		"sScrollX": "400px",
+		"language":{
+			"url":"setDataTableLanguage"
+		}
+	})
+	var tbl=$("#grid_id").DataTable();
+	$('#grid_id').on( 'dblclick', 'td', function () {
+		var mr=tbl.cell(this).index().row
+		$("#edtRow").val(mr)
+		$("#btn_sumbit_row").val(mr)
+		$( "#dlg").dialog({
+			resizable: true,
+			height:200,
+			width:500,
+			modal: true,
+			buttons: [{
+				text:'编辑',
+			handler:function() { $("#btn_sumbit_row").click() }
+			},{
+				text:'取消',
+			handler:function() { $( "#dlg").dialog( "close" ); }
+			}]
+		});
+	} );
+</script>
+{% endblock %}

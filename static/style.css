@@ -1,0 +1,168 @@
+h1,h2,h3,h4
+{
+font-family:"黑体";
+}
+h1 { 
+    /* color: black; */ 
+    /*text-decoration: underline; */
+    font-size: xx-large; 
+	border-top:3px;
+	/* border-top-color:blue; */
+	/* border-top-style:double; */
+	/* text-decoration:underline; */
+}
+h1.title
+{
+	color:white;
+	text-align:center;
+	text-decoration: none; 
+	font-size: xx-large
+	border-bottom:0px;
+}
+
+h2 { 
+    font-size: x-large; 
+    /* color:blue; */
+	color:#333399;
+
+}
+h2.author,h3.date
+{
+font-size: medium;
+color:white;
+}
+h3
+{
+font-size: large
+}
+h4
+{
+font-size: larger 
+}
+
+/* body */
+/* { */ 
+/*     padding-left: 23px; */ 
+/*     padding-right: 300px; */ 
+/*     /1* background-color: infobackground; *1/ */
+/*     position: fixed; */
+/*     /1* position: relative; *1/ */
+/* 	font-family:"宋体"; */
+/* } */
+
+li
+{ 
+    font-size: inherit;
+	text-indent:2em;
+
+}
+ol li
+{
+	text-indent:0em;
+}
+
+#header
+{
+color:white;
+text-align:center; 
+background-color: blue;
+
+}
+
+#toc,#TOC
+{
+	position: fixed; 
+	float:right;
+    width: 200px;
+    z-index: 100;
+	font-size:small;
+    right: 5%;
+	/* border:1px solid black; */
+	/* background:lightgrey; */
+	opacity:0.1;
+}
+#TOC:hover
+{
+	opacity:1;
+}
+
+#TOC ul li
+{
+	list-style-type:none;
+	text-indent:-2em;
+}
+pre{
+	border-left: 1px solid navy;
+	margin-left: 1em;
+	padding: 0.4em 0.8em;
+	background-color: #333;
+	color:white;
+	/* background-color: #999999; */
+	border-bottom-right-radius:8px;
+	border-top-right-radius:8px;
+}
+p
+{
+	text-indent:2em;
+	margin:0  0;
+}
+td,th,table
+{
+	/* border: 1px solid black; */ 
+	border-collapse: collapse
+	margin-left:1em;
+}
+th
+{
+	background:#dfdfdf
+}
+table p
+{
+	text-indent:0em;
+	margin:0 0;
+}
+code
+{
+	background:#333;
+	color:white;
+	/* background:#999999; */
+	/* border-radius:8px; */
+}
+pre code{
+	font-size:small;
+	background:transparent;
+}
+img
+{
+	max-width:90%;
+	padding:0px 0px 0px 10px;
+	text-indent: 10px;
+}
+
+#footer:hover
+{
+	/* color:black; */
+	opacity:1;
+}
+
+#footer
+{
+	text-align:center;
+}
+
+.footnotes p
+{
+	font-style:italic;
+	font-size:small;
+}
+blockquote
+{
+	background:#81a778;
+	font-size:small;
+}
+
+blockquote p
+{
+	text-indent:0px;
+}
+/* vim: se ts=4: */
